@@ -5,7 +5,7 @@ import Impressor from "../interfaces/impressor";
 import Cliente from "../modelos/cliente";
 
 export default class ListagemDependentes extends Processo {
-    private clientes: Cliente[];
+    private titular: Cliente;
     private impressor!: Impressor;
     private titularNome: String;
 
@@ -13,15 +13,15 @@ export default class ListagemDependentes extends Processo {
         super();
 
         this.titularNome = this.entrada.receberTexto("Qual o nome do titular?");
-        this.clientes = Armazem.InstanciaUnica.Clientes.filter(
-            (cliente) => cliente.Titular && cliente.Titular.Nome == this.titularNome
-        );
+        this.titular = Armazem.InstanciaUnica.Clientes.filter(
+            (cliente) => !cliente.Titular && cliente.Nome == this.titularNome
+        )[0];
     }
 
     processar(): void {
         console.clear();
         console.log(`Iniciando a listagem dos clientes dependentes do titular ${this.titularNome}...`);
-        this.clientes.forEach(cliente => {
+        this.titular.Dependentes.forEach((cliente) => {
             this.impressor = new ImpressorCliente(cliente);
             console.log(this.impressor.imprimir());
         });

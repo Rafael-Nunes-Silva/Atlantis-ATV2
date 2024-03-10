@@ -6,13 +6,18 @@ export default class EdicaoClienteDependente extends Processo {
     processar(): void {
         console.log("Iniciando edição de dependente...");
 
-        const nome = this.entrada.receberTexto("Qual o nome do dependente?");
-        const dependente = Armazem.InstanciaUnica.Clientes.filter(
-            (cliente) => cliente.Titular && cliente.Nome == nome
+        const nomeTitular = this.entrada.receberTexto("Qual o nome do titular?");
+        const titular = Armazem.InstanciaUnica.Clientes.filter(
+            (cliente) => !cliente.Titular && cliente.Nome == nomeTitular
+        )[0];
+
+        const nomeDependente = this.entrada.receberTexto("Qual o nome do dependente?");
+        const dependente = titular.Dependentes.filter(
+            (cliente) => cliente.Titular && cliente.Nome == nomeDependente
         )[0];
 
         if (!dependente){
-            console.log(`O dependente ${nome} não existe`);
+            console.log(`O dependente ${nomeDependente} não existe`);
             return;
         }
 
