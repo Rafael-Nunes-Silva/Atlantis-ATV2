@@ -1,7 +1,5 @@
 import Processo from "../abstracoes/processo";
 import Armazem from "../dominio/armazem";
-import Cliente from "../modelos/cliente";
-import CadastrarDocumentosCliente from "./cadastrarDocumentosCliente";
 import CadastroEnderecoTitular from "./cadastroEnderecoTitular";
 import TipoEdicaoDocumentos from "./tipoEdicaoDocumentos";
 
@@ -41,14 +39,6 @@ export default class EdicaoClienteTitular extends Processo {
             this.processo.processar();
         }
 
-        
-
-        // this.processo = new CadastrarDocumentosCliente(cliente)
-        // this.processo.processar()
-
-        // let armazem = Armazem.InstanciaUnica
-        // armazem.Clientes.push(cliente)
-
-        console.log("Finalizando o cadastro do cliente...")
+        console.log("Finalizando a edição do titular...");
     }
 }
