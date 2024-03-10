@@ -2,7 +2,7 @@ import Processo from "../abstracoes/processo";
 import { TipoDocumento } from "../enumeracoes/TipoDocumento";
 import Cliente from "../modelos/cliente";
 
-export default class RemoveRg extends Processo {
+export default class RemovePassaporte extends Processo {
     private cliente: Cliente;
 
     constructor(cliente: Cliente) {
@@ -18,7 +18,7 @@ export default class RemoveRg extends Processo {
         for (; index < this.cliente.Documentos.length; index++) {
             const cliente = this.cliente.Documentos[index];
             if (cliente.Numero == numero &&
-                cliente.Tipo == TipoDocumento.RG &&
+                cliente.Tipo == TipoDocumento.Passaporte &&
                 cliente.DataExpedicao.getTime() == dataExpedicao.getTime()) {
                 break;
             }
